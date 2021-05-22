@@ -21,7 +21,7 @@ CurrentWeatherFactory factory = CurrentWeatherFactory(
  language: /// Defaults to English, available langauges are listed further below 
  settings: /// An instance of UnitSettings, containing your configuration of what units you want the weather data recevied to be converted to 
  locationCoords: /// An instance of LocationCoords, containing the latitude and longitude you want to query the weather for 
-cityName: /// The name of the city you want to query the weather for );  
+ cityName: /// The name of the city you want to query the weather for );  
 /// Requesting the weather and awaiting the result  
 Tuple2<RequestStatus, CurrentWeather?> result = await factory.getWeather();  
   
@@ -78,7 +78,8 @@ You can also contact me if you do have an account with the required clearance bu
    
 ## License 
 This package is licensed under the Apache License, Version 2.0      
-``` Copyright 2021 Tanzil Zubair Bin Zaman Licensed under the Apache License, Version 2.0 (the "License");  
+``` 
+Copyright 2021 Tanzil Zubair Bin Zaman Licensed under the Apache License, Version 2.0 (the "License");  
 you may not use this file except in compliance with the License.  
 You may obtain a copy of the License at  
   
