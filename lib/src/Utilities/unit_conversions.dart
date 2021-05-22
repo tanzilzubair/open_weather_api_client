@@ -2,22 +2,21 @@ import 'package:open_weather_api_client/src/Utilities/settings_enums.dart';
 
 import 'general_enums.dart';
 
-/// TODO: Implement a system to be able to select a desired level of accuracy for the measurements
 num pressureToSelectedUnit({
   required num pressure,
   required PressureUnit unit,
 }) {
   String result = "";
   if (unit == PressureUnit.HectoPascals) {
-    result = "${pressure.toStringAsFixed(0)}";
+    result = "${pressure.toStringAsFixed(3)}";
   } else if (unit == PressureUnit.KiloPascals) {
-    result = "${(pressure * 0.1).toStringAsFixed(0)}";
+    result = "${(pressure * 0.1).toStringAsFixed(3)}";
   } else if (unit == PressureUnit.MillimetersMercury) {
-    result = "${(pressure * 0.7500615759).toStringAsFixed(0)}";
+    result = "${(pressure * 0.7500615759).toStringAsFixed(3)}";
   } else if (unit == PressureUnit.InchesMercury) {
-    result = "${(pressure / 33.864).toStringAsFixed(0)}";
+    result = "${(pressure / 33.864).toStringAsFixed(3)}";
   } else if (unit == PressureUnit.Millibars) {
-    result = "${pressure.toStringAsFixed(0)}";
+    result = "${pressure.toStringAsFixed(3)}";
   }
   return num.parse(result);
 }
@@ -29,10 +28,10 @@ num? distanceToSelectedUnit({
   String result = "";
   if (unit == DistanceUnit.Kilometers) {
     distance = distance / 1000;
-    result = distance.toStringAsFixed(1);
+    result = distance.toStringAsFixed(3);
   } else if (unit == DistanceUnit.Miles) {
     distance = (distance * 0.000621371);
-    result = distance.toStringAsFixed(1);
+    result = distance.toStringAsFixed(3);
   }
   return num.parse(result);
 }
@@ -46,13 +45,41 @@ num? windSpeedToSelectedUnit(
   // This null check exists as if a weather phenomenon does not occur, Open Weather Map returns null as its value
   if (windSpeed != null) {
     if (unit == WindSpeedUnit.Miles_Hour) {
-      result = "${(windSpeed * 2.2369363).toStringAsFixed(1)}";
+      result = "${(windSpeed * 2.2369363).toStringAsFixed(3)}";
     } else if (unit == WindSpeedUnit.Kilometres_Hour) {
-      result = "${(windSpeed * 3.6).toStringAsFixed(1)}";
+      result = "${(windSpeed * 3.6).toStringAsFixed(3)}";
     } else if (unit == WindSpeedUnit.Metres_Second) {
-      result = "${windSpeed.toStringAsFixed(1)}";
+      result = "${windSpeed.toStringAsFixed(3)}";
     } else if (unit == WindSpeedUnit.Knots) {
-      result = "${windSpeed * 1.9438445}";
+      result = "${(windSpeed * 1.9438445).toStringAsFixed(3)}";
+    } else if (unit == WindSpeedUnit.Beaufort) {
+      if (windSpeed < 0.3) {
+        result = "0";
+      } else if (windSpeed >= 0.3 && windSpeed < 1.5) {
+        result = "1";
+      } else if (windSpeed >= 1.5 && windSpeed < 3.3) {
+        result = "2";
+      } else if (windSpeed >= 3.3 && windSpeed < 5.5) {
+        result = "3";
+      } else if (windSpeed >= 5.5 && windSpeed < 8.0) {
+        result = "4";
+      } else if (windSpeed >= 8.0 && windSpeed < 10.8) {
+        result = "5";
+      } else if (windSpeed >= 10.8 && windSpeed < 13.9) {
+        result = "6";
+      } else if (windSpeed >= 13.9 && windSpeed < 17.2) {
+        result = "7";
+      } else if (windSpeed >= 17.2 && windSpeed < 20.7) {
+        result = "8";
+      } else if (windSpeed >= 20.7 && windSpeed < 24.5) {
+        result = "9";
+      } else if (windSpeed >= 24.5 && windSpeed < 28.4) {
+        result = "10";
+      } else if (windSpeed >= 28.4 && windSpeed < 32.6) {
+        result = "11";
+      } else if (windSpeed >= 32.6) {
+        result = "12";
+      }
     }
     return num.parse(result);
   } else {
@@ -66,10 +93,10 @@ num? temperatureToSelectedUnit({
 }) {
   String result = "";
   if (unit == TemperatureUnit.Kelvin) {
-    result = "${temp.toStringAsFixed(0)}";
+    result = "${temp.toStringAsFixed(3)}";
   } else if (unit == TemperatureUnit.Celsius) {
     temp -= 273.15;
-    result = "${temp.toStringAsFixed(0)}";
+    result = "${temp.toStringAsFixed(3)}";
   } else if (unit == TemperatureUnit.Fahrenheit) {
     temp = ((temp - 273.15) * (9 / 5)) + 32;
     result = "${temp.toStringAsFixed(0)}";
@@ -85,9 +112,9 @@ num? precipitationToSelectedUnit({
   if (amount != null) {
     if (unit == PrecipitationUnit.Inches) {
       num precipAmount = amount / 25.4;
-      result = "${precipAmount.toStringAsFixed(1)}";
+      result = "${precipAmount.toStringAsFixed(3)}";
     } else {
-      result = "${amount.toStringAsFixed(1)}";
+      result = "${amount.toStringAsFixed(3)}";
     }
     return num.parse(result);
   } else {

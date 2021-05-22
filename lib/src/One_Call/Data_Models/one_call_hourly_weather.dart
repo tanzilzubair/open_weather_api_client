@@ -2,31 +2,66 @@ import '../../Utilities/general_enums.dart';
 import '../../Utilities/unit_conversions.dart';
 import '../../Utilities/units_settings.dart';
 
+/// This is the class that handles JSON deserialization and makes data for the hourly weather
+/// forecast received from queries to the OneCall API endpoint accessible.
 class OneCallHourlyWeather {
+  /// The enum for identifying what the weather condition is. The main description
+  /// parameter provides one suitable for display, so this is primarily provided to
+  /// aid in implementing conditional logic dependent on the weather, for example, a
+  /// dynamic background
   WeatherType? weatherType;
+
+  /// This is the main, concise description for the current weather
   String? mainDescription;
+
+  /// This is the secondary, longer description for the current weather
   String? secondaryDescription;
 
+  /// The current temperature, in Celsius by default
   num? temp;
-  num? feelsLikeTemp;
-  num? dewPoint;
 
+  /// The current temperature, accounting for human perception, in Celsius by default
+  num? feelsLikeTemp;
+
+  /// The atmospheric temperature (varying according to the pressure and humidity)
+  /// below which dew can form
+  num? dewPointTemp;
+
+  /// The humidity, in percentage
   num? humidity;
+
+  /// The cloudiness, in percentage
   num? cloudiness;
 
+  /// The Ultraviolet Index, an international standard with values ranging from 0-12. More
+  /// information can be found at [https://en.wikipedia.org/wiki/Ultraviolet_index]
   num? uvi;
+
+  /// The current visibility, in kilometres by default
   num? visibility;
+
+  /// The atmospheric pressure, in hecto-pascals by default
   num? pressure;
 
+  /// The wind speed, in km/h by default
   num? windSpeed;
+
+  /// The direction of the wind, in degrees
   int? windDegree;
+
+  /// The wind gust speed, in km/h by default
   num? windGustSpeed;
 
+  /// The probability of precipitation in that hour, as a percentage
   int? precipitationChance;
+
+  /// The amount of rainfall in the past 1 hour, in mm by default
   num? rainAmountLast1h;
 
+  /// The amount of snowfall in the past 1 hour, in mm by default
   num? snowAmountLast1h;
 
+  /// The timestamp of when the data was requested, in UTC time
   DateTime? timeStamp;
 
   OneCallHourlyWeather({
@@ -35,7 +70,7 @@ class OneCallHourlyWeather {
     this.secondaryDescription,
     this.temp,
     this.feelsLikeTemp,
-    this.dewPoint,
+    this.dewPointTemp,
     this.humidity,
     this.cloudiness,
     this.uvi,
@@ -74,7 +109,7 @@ class OneCallHourlyWeather {
     );
 
     // Formatting feels like temperature
-    num? dewPoint = temperatureToSelectedUnit(
+    num? dewPointTemp = temperatureToSelectedUnit(
       temp: json['dew_point'],
       unit: settings.temperatureUnit,
     );
@@ -118,7 +153,7 @@ class OneCallHourlyWeather {
       secondaryDescription: json['weather'][0]['description'],
       temp: temp,
       feelsLikeTemp: feelsLikeTemp,
-      dewPoint: dewPoint,
+      dewPointTemp: dewPointTemp,
       humidity: json['humidity'],
       cloudiness: json['clouds'],
       uvi: json['uvi'],

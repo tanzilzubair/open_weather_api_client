@@ -1,3 +1,22 @@
+## [2.0.0] - Bug fixes, QOL changes, and new features
+
+### Breaking changes:
+* Tuple2 has been deprecated, and weather factories now return data of
+type RequestResponse
+
+### New Features:
+* Added support for the Beaufort scale for wind speed unit conversions
+
+### QOL Changes:
+* Reduced package dependencies greatly (resulting in breaking changes)
+* All unit conversions are now done at the highest possible accuracy,
+and provided as is, without truncating decimal points
+
+### Minor changes
+* Fully commented the OneCall data models
+* Better documentation 
+* Updated the example project to reflect API changes
+
 ## [1.0.0] - Initial Release
 
 * Initial release

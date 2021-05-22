@@ -4,7 +4,7 @@ import '../Utilities/general_enums.dart';
 import '../Utilities/unit_conversions.dart';
 import '../Utilities/units_settings.dart';
 
-/// This is the class that handles JSON deserialization and makes data for current weather queries accessible.
+/// This is the class that handles JSON deserialization and makes data for CurrentWeather queries accessible.
 /// The fields in this class differ slightly to [OneCallCurrentWeather] as the API provides different fields
 /// when querying the One Call API Endpoint and the Current Weather API endpoint.
 class CurrentWeather {
@@ -40,10 +40,10 @@ class CurrentWeather {
   /// The maximum temperature for that area for that moment, in Celsius by default
   num? maxTemp;
 
-  /// The humidity, as a percentage out of 100
+  /// The humidity, in percentage
   num? humidity;
 
-  /// The cloudiness, as a percentage out of 100
+  /// The cloudiness, in percentage
   num? cloudiness;
 
   /// The atmospheric pressure, in hecto-pascals by default
@@ -55,13 +55,13 @@ class CurrentWeather {
   /// The atmospheric pressure at sea level, in hecto-pascals by default
   num? pressureSeaLevel;
 
-  /// The wind speed, in m/s by default
+  /// The wind speed, in km/h by default
   num? windSpeed;
 
   /// The direction of the wind, in degrees
   int? windDegree;
 
-  /// The wind gust speed, in m/s by default
+  /// The wind gust speed, in km/h by default
   num? windGustSpeed;
 
   /// The amount of rainfall in the past 1 hour, in mm by default

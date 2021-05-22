@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:open_weather_api_client/open_weather_api_client.dart';
-import 'package:tuple/tuple.dart';
 
 // This example uses the Current Weather API endpoint
 class Example1 extends StatelessWidget {
@@ -25,20 +24,20 @@ class Example1 extends StatelessWidget {
               );
 
               // Requesting the weather
-              Tuple2<RequestStatus, CurrentWeather?> result =
+              RequestResponse<CurrentWeather?> result =
                   await factory.getWeather();
 
               // Checking if the request was successful
-              if (result.item1 == RequestStatus.Successful) {
+              if (result.requestStatus == RequestStatus.Successful) {
                 // Printing the city name from the server
-                print(result.item2!.cityName);
+                print(result.response!.cityName);
                 // Printing the temperature
-                print(result.item2!.temp);
+                print(result.response!.temp);
                 // Printing the weather type
-                print(result.item2!.weatherType);
+                print(result.response!.weatherType);
               } else {
                 // Printing the error that occurred
-                print("Error of type ${result.item1} occurred");
+                print("Error of type ${result.requestStatus} occurred");
               }
             },
             child: Container(
@@ -87,20 +86,21 @@ class Example2 extends StatelessWidget {
               );
 
               // Requesting the weather
-              Tuple2<RequestStatus, OneCallWeather?> result =
+              RequestResponse<OneCallWeather?> result =
                   await factory.getWeather();
 
               // Checking if the request was successful
-              if (result.item1 == RequestStatus.Successful) {
+              if (result.requestStatus == RequestStatus.Successful) {
                 // Printing the current weather type
-                print(result.item2!.currentWeather!.weatherType);
+                print(result.response!.currentWeather!.weatherType);
                 // Printing the next hour's weather type
-                print(result.item2!.hourlyWeather![1]!.weatherType);
+                print(result.response!.hourlyWeather![1]!.weatherType);
                 // Printing the precipitation amount 30 minutes later
-                print(result.item2!.minutelyWeather![29]!.precipitationAmount);
+                print(
+                    result.response!.minutelyWeather![29]!.precipitationAmount);
               } else {
                 // Printing the error that occurred
-                print("Error of type ${result.item1} occurred");
+                print("Error of type ${result.requestStatus} occurred");
               }
             },
             child: Container(

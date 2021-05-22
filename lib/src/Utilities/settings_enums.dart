@@ -33,4 +33,5 @@ enum WindSpeedUnit {
   Kilometres_Hour,
   Metres_Second,
   Knots,
+  Beaufort,
 }

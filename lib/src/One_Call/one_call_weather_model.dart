@@ -3,7 +3,9 @@ import 'package:open_weather_api_client/src/Utilities/location_coords.dart';
 import '../Utilities/units_settings.dart';
 import 'Data_Models/one_call_components.dart';
 
-/// This is the class that handles JSON deserialization and makes data for current weather queries accessible
+/// This is the class that handles JSON deserialization and makes data for OneCall weather queries accessible.
+/// The fields in this class differ slightly to [CurrentWeather] as the API provides different fields
+/// when querying the Current Weather API endpoint and the One Call API Endpoint.
 class OneCallWeather {
   /// The longitude and latitude for the city for which the weather was queried
   LocationCoords? locationCoords;

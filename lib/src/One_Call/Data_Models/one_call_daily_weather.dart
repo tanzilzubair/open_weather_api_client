@@ -2,45 +2,110 @@ import '../../Utilities/general_enums.dart';
 import '../../Utilities/unit_conversions.dart';
 import '../../Utilities/units_settings.dart';
 
+/// This is the class that handles JSON deserialization and makes data for the daily weather
+/// forecast received from queries to the OneCall API endpoint accessible.
 class OneCallDailyWeather {
+  /// The enum for identifying what the weather condition is. The main description
+  /// parameter provides one suitable for display, so this is primarily provided to
+  /// aid in implementing conditional logic dependent on the weather, for example, a
+  /// dynamic background
   WeatherType? weatherType;
+
+  /// This is the main, concise description for the current weather
   String? mainDescription;
+
+  /// This is the secondary, longer description for the current weather
   String? secondaryDescription;
 
+  /// The temperature in the morning, in Celsius by default
   num? tempMorning;
+
+  /// The temperature during the day, in Celsius by default
   num? tempDay;
+
+  /// The temperature in the evening, in Celsius by default
   num? tempEvening;
+
+  /// The temperature at night, in Celsius by default
   num? tempNight;
+
+  /// The minimum temperature on that day
   num? tempMin;
+
+  /// The maximum temperature on that day
   num? tempMax;
 
+  /// The temperature in the morning, accounting for human perception, in Celsius by default
   num? feelsLikeTempMorning;
+
+  /// The temperature during the day, accounting for human perception, in Celsius by default
   num? feelsLikeTempDay;
+
+  /// The temperature in the evening, accounting for human perception, in Celsius by default
   num? feelsLikeTempEvening;
+
+  /// The temperature at night, accounting for human perception, in Celsius by default
   num? feelsLikeTempNight;
 
-  num? dewPoint;
+  /// The atmospheric temperature (varying according to the pressure and humidity)
+  /// below which dew can form
+  num? dewPointTemp;
 
+  /// The humidity, in percentage
   num? humidity;
+
+  /// The cloudiness, in percentage
   num? cloudiness;
 
+  /// The Ultraviolet Index, an international standard with values ranging from 0-12. More
+  /// information can be found at [https://en.wikipedia.org/wiki/Ultraviolet_index]
   num? uvi;
+
+  /// The atmospheric pressure, in hecto-pascals by default
   num? pressure;
 
+  /// The wind speed, in km/h by default
   num? windSpeed;
+
+  /// The direction of the wind, in degrees
   int? windDegree;
+
+  /// The wind gust speed, in km/h by default
   num? windGustSpeed;
 
+  /// The probability of precipitation on that day, as a percentage
   int? precipitationChance;
+
+  /// The amount of predicted rainfall that day, in millimetres by default
   num? rainAmount;
 
+  /// The amount of predicted snowfall that day, in millimetres by default
   num? snowAmount;
 
+  /// The time of sunrise for that day, in UTC time
   DateTime? sunrise;
+
+  /// The time of sunset for that day, in UTC time
   DateTime? sunset;
+
+  /// The time when the moon rises, in UTC time
   DateTime? moonrise;
+
+  /// The time when the moon sets, in UTC time
   DateTime? moonset;
+
+  /// The phase of the moon.
+  /// - A value of 0 or 1 is a new moon.
+  /// - A value between 0 and 0.25 is a waxing crescent
+  /// - A value of 0.25 is a first quarter moon
+  /// - A value between 0.25 and 0.5 is a waxing gibbous
+  /// - A value of 0.5 is a full moon
+  /// - A value between 0.5 and 0.75 is a waning gibbous
+  /// - A value of 0.75 is a last quarter moon
+  /// - A value between 0.75 and 1 is a waning crescent
   double? moonPhase;
+
+  /// The timestamp of when the data was requested, in UTC time
   DateTime? timeStamp;
 
   OneCallDailyWeather({
@@ -57,7 +122,7 @@ class OneCallDailyWeather {
     this.feelsLikeTempDay,
     this.feelsLikeTempEvening,
     this.feelsLikeTempNight,
-    this.dewPoint,
+    this.dewPointTemp,
     this.humidity,
     this.cloudiness,
     this.uvi,
@@ -148,7 +213,7 @@ class OneCallDailyWeather {
     );
 
     // Formatting feels like temperature
-    num? dewPoint = temperatureToSelectedUnit(
+    num? dewPointTemp = temperatureToSelectedUnit(
       temp: json['dew_point'],
       unit: settings.temperatureUnit,
     );
@@ -200,7 +265,7 @@ class OneCallDailyWeather {
       feelsLikeTempDay: feelsLikeTempDay,
       feelsLikeTempEvening: feelsLikeTempEvening,
       feelsLikeTempNight: feelsLikeTempNight,
-      dewPoint: dewPoint,
+      dewPointTemp: dewPointTemp,
       humidity: json['humidity'],
       cloudiness: json['clouds'],
       uvi: json['uvi'],
