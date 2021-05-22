@@ -21,7 +21,7 @@ CurrentWeatherFactory factory = CurrentWeatherFactory(
  language: /// Defaults to English, available langauges are listed further below 
  settings: /// An instance of UnitSettings, containing your configuration of what units you want the weather data recevied to be converted to 
  locationCoords: /// An instance of LocationCoords, containing the latitude and longitude you want to query the weather for 
-cityName: /// The name of the city you want to query the weather for );  
+ cityName: /// The name of the city you want to query the weather for );  
 /// Requesting the weather and awaiting the result  
 Tuple2<RequestStatus, CurrentWeather?> result = await factory.getWeather();  
   
