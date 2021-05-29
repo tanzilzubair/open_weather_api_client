@@ -33,13 +33,14 @@ class OneCallWeatherFactory {
   /// This is the maximum amount of time that the factory waits for a request to the server to complete, before retrying or
   /// returning an error
   Duration maxTimeBeforeTimeout;
+
   OneCallWeatherFactory({
     required this.apiKey,
     this.language = Language.ENGLISH,
     required this.settings,
     this.locationCoords,
     this.exclusions,
-    this.maxTimeBeforeTimeout = const Duration(seconds: 3),
+    this.maxTimeBeforeTimeout = const Duration(seconds: 20),
   }) : assert(
           locationCoords != null,
           "A city name or an instance of LocationCoords must be provided",
@@ -93,7 +94,7 @@ class OneCallWeatherFactory {
         milliseconds: 150,
       ),
       maxAttempts: 4,
-      maxDelay: Duration(seconds: 2),
+      maxDelay: Duration(seconds: maxTimeBeforeTimeout.inSeconds),
       randomizationFactor: 0.2,
     );
 
@@ -124,6 +125,7 @@ class OneCallWeatherFactory {
       );
     }
     final payLoad = json.decode(response.body) as Map<String, dynamic>;
+    print("Json in part 1: ${payLoad['minutely'][4]['dt']}");
 
     /// Checking for error status codes from server response
     return _checkForErrors(payLoad: payLoad);

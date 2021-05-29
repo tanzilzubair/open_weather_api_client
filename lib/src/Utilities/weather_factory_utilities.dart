@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:io';
+import 'package:universal_io/io.dart';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:open_weather_api_client/src/Utilities/languages.dart';
@@ -8,13 +8,17 @@ import 'general_enums.dart';
 
 class WeatherFactoryUtilities {
   final String apiKey;
-  final Language language;
+  final Language? language;
   final Duration maxTimeBeforeTimeout;
+  final Duration? airQualityHistoricalQueryStartTime;
+  final Duration? airQualityHistoricalQueryEndTime;
 
   WeatherFactoryUtilities({
     required this.apiKey,
-    required this.language,
+    this.language,
     required this.maxTimeBeforeTimeout,
+    this.airQualityHistoricalQueryStartTime,
+    this.airQualityHistoricalQueryEndTime,
   });
 
   /// Helper function for queries
@@ -35,7 +39,11 @@ class WeatherFactoryUtilities {
       }
     }
     url += 'appid=$apiKey&';
+
+    /// Note: The language property has no effect on Air Pollution queries, as all of the data the server
+    /// sends is numerical in nature
     url += 'lang=${languageCode[language]}';
+    print(url);
     return Uri.parse(url);
   }
 
@@ -79,6 +87,8 @@ class WeatherFactoryUtilities {
       request = 'weather';
     } else if (requestType == RequestType.OneCall) {
       request = "onecall";
+    } else if (requestType == RequestType.AirQuality) {
+      request = "air_pollution";
     }
     return request;
   }
@@ -105,3 +115,5 @@ class WeatherFactoryUtilities {
     return url;
   }
 }
+
+/// TODO: You were in the middle of implementing the basis for Air Quality queries

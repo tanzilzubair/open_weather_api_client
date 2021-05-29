@@ -51,8 +51,10 @@ class OneCallWeather {
     Map<String, dynamic> json,
     UnitSettings settings,
   ) {
+    print("Json $json");
     // Looping through the array of minutely weather JSON and parsing them into a list
     List? minutelyPayload = json['minutely'];
+    print("Minutely Payload $minutelyPayload");
     List<OneCallMinutelyWeather?>? minutelyWeather = minutelyPayload!.map(
       (e) {
         return OneCallMinutelyWeather.fromJson(
