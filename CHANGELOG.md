@@ -1,3 +1,7 @@
+## [2.0.1] - Bug fix
+* Fixed a bug where OneCallWeather would fail if parts of the request body were null
+* Updated mistakes in `README.md`
+
 ## [2.0.0] - Bug fixes, QOL changes, and new features
 
 ### Breaking changes:

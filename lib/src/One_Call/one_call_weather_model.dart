@@ -51,36 +51,55 @@ class OneCallWeather {
     Map<String, dynamic> json,
     UnitSettings settings,
   ) {
-    // Looping through the array of minutely weather JSON and parsing them into a list
+    // Looping through the array of minutely weather JSON and parsing them into a list, but only if
+    // the JSON is not null, as some requests sometimes don't include specific parts
     List? minutelyPayload = json['minutely'];
-    List<OneCallMinutelyWeather?>? minutelyWeather = minutelyPayload!.map(
-      (e) {
-        return OneCallMinutelyWeather.fromJson(
-          e,
-          settings,
-        );
-      },
-    ).toList();
+    List<OneCallMinutelyWeather?>? minutelyWeather;
+    if (minutelyPayload != null) {
+      minutelyWeather = minutelyPayload.map(
+        (e) {
+          return OneCallMinutelyWeather.fromJson(
+            e,
+            settings,
+          );
+        },
+      ).toList();
+    } else {
+      minutelyWeather = null;
+    }
 
-    // Looping through the array of hourly weather JSON and parsing them into a list
+    // Looping through the array of hourly weather JSON and parsing them into a list, but only if
+    // the JSON is not null, as some requests sometimes don't include specific parts
     List? hourlyPayload = json['hourly'];
-    List<OneCallHourlyWeather?>? hourlyWeather = hourlyPayload!.map(
-      (e) {
-        return OneCallHourlyWeather.fromJson(
+    List<OneCallHourlyWeather?>? hourlyWeather;
+    if (hourlyPayload != null) {
+      hourlyWeather = hourlyPayload.map(
+        (e) {
+          return OneCallHourlyWeather.fromJson(
+            e,
+            settings,
+          );
+        },
+      ).toList();
+    } else {
+      hourlyWeather = null;
+    }
+
+    // Looping through the array of daily weather JSON and parsing them into a list, but only if
+    // the JSON is not null, as some requests sometimes don't include specific parts
+    List? dailyPayload = json['daily'];
+    List<OneCallDailyWeather?>? dailyWeather;
+
+    if (dailyPayload != null) {
+      dailyWeather = dailyPayload.map((e) {
+        return OneCallDailyWeather.fromJson(
           e,
           settings,
         );
-      },
-    ).toList();
-
-    // Looping through the array of daily weather JSON and parsing them into a list
-    List? dailyPayload = json['daily'];
-    List<OneCallDailyWeather?>? dailyWeather = dailyPayload!.map((e) {
-      return OneCallDailyWeather.fromJson(
-        e,
-        settings,
-      );
-    }).toList();
+      }).toList();
+    } else {
+      dailyWeather = null;
+    }
 
     return OneCallWeather(
       locationCoords: LocationCoords(
