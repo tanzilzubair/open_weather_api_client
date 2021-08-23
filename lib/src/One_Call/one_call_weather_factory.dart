@@ -67,8 +67,8 @@ class OneCallWeatherFactory {
     } else {
       /// There is a connection error as connectionCheck() returned InternetStatus.Disconnected
       return RequestResponse<OneCallWeather?>(
-        RequestStatus.ConnectionError,
-        null,
+        requestStatus: RequestStatus.ConnectionError,
+        response: null,
       );
     }
   }
@@ -109,18 +109,18 @@ class OneCallWeatherFactory {
       );
     } on SocketException {
       return RequestResponse<OneCallWeather?>(
-        RequestStatus.UnknownError,
-        null,
+        requestStatus: RequestStatus.UnknownError,
+        response: null,
       );
     } on TimeoutException {
       return RequestResponse<OneCallWeather?>(
-        RequestStatus.TimeoutError,
-        null,
+        requestStatus: RequestStatus.TimeoutError,
+        response: null,
       );
     } catch (e) {
       return RequestResponse<OneCallWeather?>(
-        RequestStatus.UnknownError,
-        null,
+        requestStatus: RequestStatus.UnknownError,
+        response: null,
       );
     }
     final payLoad = json.decode(response.body) as Map<String, dynamic>;
@@ -137,22 +137,22 @@ class OneCallWeatherFactory {
       /// and latitude is sent to the server, or when (rarely) the server may not support
       /// weather queries for that location
       return RequestResponse<OneCallWeather?>(
-        RequestStatus.NonExistentError,
-        null,
+        requestStatus: RequestStatus.NonExistentError,
+        response: null,
       );
     } else if (payLoad.containsValue("429")) {
       /// This error is for when the API Key provided has exceeded its quota
       return RequestResponse<OneCallWeather?>(
-        RequestStatus.OverloadError,
-        null,
+        requestStatus: RequestStatus.OverloadError,
+        response: null,
       );
     } else {
       OneCallWeather weather = OneCallWeather.fromJson(payLoad, settings);
 
       /// The request is successful
       return RequestResponse<OneCallWeather?>(
-        RequestStatus.Successful,
-        weather,
+        requestStatus: RequestStatus.Successful,
+        response: weather,
       );
     }
   }

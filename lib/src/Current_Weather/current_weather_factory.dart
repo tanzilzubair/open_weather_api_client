@@ -48,8 +48,9 @@ class CurrentWeatherFactory {
     this.cityName,
     this.maxTimeBeforeTimeout = const Duration(seconds: 3),
   }) : assert(
-          cityName != null || locationCoords != null,
-          "A city name or an instance of LocationCoords must be provided",
+          (cityName != null && locationCoords == null) ||
+              (cityName == null && locationCoords != null),
+          "A city name or an instance of LocationCoords must be provided, but both cannot be used to query at the same time",
         );
 
   /// Public function to get the weather for a given saved city
@@ -78,8 +79,8 @@ class CurrentWeatherFactory {
           /// but if the factory is hooked up directly to a TextField widget, and the user accidentally presses
           /// send on an empty widget, an empty String may be passed here
           return RequestResponse(
-            RequestStatus.EmptyError,
-            null,
+            requestStatus: RequestStatus.EmptyError,
+            response: null,
           );
         } else {
           /// Handing info to be requested and returning the info
@@ -90,8 +91,8 @@ class CurrentWeatherFactory {
     } else {
       /// There is a connection error as connectionCheck() returned InternetStatus.Disconnected
       return RequestResponse(
-        RequestStatus.ConnectionError,
-        null,
+        requestStatus: RequestStatus.ConnectionError,
+        response: null,
       );
     }
   }
@@ -126,18 +127,18 @@ class CurrentWeatherFactory {
       );
     } on SocketException {
       return RequestResponse<CurrentWeather?>(
-        RequestStatus.UnknownError,
-        null,
+        requestStatus: RequestStatus.UnknownError,
+        response: null,
       );
     } on TimeoutException {
       return RequestResponse<CurrentWeather?>(
-        RequestStatus.TimeoutError,
-        null,
+        requestStatus: RequestStatus.TimeoutError,
+        response: null,
       );
     } catch (e) {
       return RequestResponse<CurrentWeather?>(
-        RequestStatus.UnknownError,
-        null,
+        requestStatus: RequestStatus.UnknownError,
+        response: null,
       );
     }
     final payLoad = json.decode(response.body) as Map<String, dynamic>;
@@ -186,18 +187,18 @@ class CurrentWeatherFactory {
       );
     } on SocketException {
       return RequestResponse<CurrentWeather?>(
-        RequestStatus.UnknownError,
-        null,
+        requestStatus: RequestStatus.UnknownError,
+        response: null,
       );
     } on TimeoutException {
       return RequestResponse<CurrentWeather?>(
-        RequestStatus.TimeoutError,
-        null,
+        requestStatus: RequestStatus.TimeoutError,
+        response: null,
       );
     } catch (e) {
       return RequestResponse<CurrentWeather?>(
-        RequestStatus.UnknownError,
-        null,
+        requestStatus: RequestStatus.UnknownError,
+        response: null,
       );
     }
 
@@ -216,22 +217,22 @@ class CurrentWeatherFactory {
       /// and latitude is sent to the server, or when (rarely) the server may not support
       /// weather queries for that location
       return RequestResponse<CurrentWeather?>(
-        RequestStatus.NonExistentError,
-        null,
+        requestStatus: RequestStatus.NonExistentError,
+        response: null,
       );
     } else if (payLoad.containsValue("429")) {
       /// This error is for when the API Key provided has exceeded its quota
       return RequestResponse<CurrentWeather?>(
-        RequestStatus.OverloadError,
-        null,
+        requestStatus: RequestStatus.OverloadError,
+        response: null,
       );
     } else {
       CurrentWeather weather = CurrentWeather.fromJson(payLoad, settings);
 
       /// The request is successful
       return RequestResponse<CurrentWeather?>(
-        RequestStatus.Successful,
-        weather,
+        requestStatus: RequestStatus.Successful,
+        response: weather,
       );
     }
   }

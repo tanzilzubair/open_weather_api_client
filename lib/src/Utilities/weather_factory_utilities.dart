@@ -30,6 +30,9 @@ class WeatherFactoryUtilities {
       url += 'q=$cityName&';
     } else if (location != null) {
       url += 'lat=${location.latitude}&lon=${location.longitude}&';
+      // This is inside the if statement that location coords have been given, and not outside,
+      // since the OneCall API endpoint only accepts queries made with coordinates, at the time
+      // of writing this
       if (requestType == RequestType.OneCall && exclusions != null) {
         url += _computeExclusion(exclusions: exclusions);
       }

@@ -83,6 +83,7 @@ class Example2 extends StatelessWidget {
                   longitude: 51.5074,
                   latitude: 0.1278,
                 ),
+                maxTimeBeforeTimeout: Duration(seconds: 10),
               );
 
               // Requesting the weather

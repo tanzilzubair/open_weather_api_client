@@ -8,8 +8,8 @@ class RequestResponse<T> {
   /// The request response
   final T response;
 
-  const RequestResponse(
-    this.requestStatus,
-    this.response,
-  );
+  const RequestResponse({
+    required this.requestStatus,
+    required this.response,
+  });
 }

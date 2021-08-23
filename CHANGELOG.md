@@ -1,3 +1,10 @@
+## [3.0.0] - Minor Breaking Changes
+* BREAKING CHANGE: `RequestResponse` now uses named parameters
+* A city name and coordinates cannot both be given to the same factory class anymore
+* Updated samples in `README.md`
+* Updated examples
+* Updated dependencies
+
 ## [2.0.1] - Bug fix
 * Fixed a bug where OneCallWeather would fail if parts of the request body were null
 * Updated mistakes in `README.md`
