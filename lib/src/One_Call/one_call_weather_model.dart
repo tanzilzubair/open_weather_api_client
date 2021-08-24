@@ -10,7 +10,8 @@ class OneCallWeather {
   /// The longitude and latitude for the city for which the weather was queried
   LocationCoords? locationCoords;
 
-  /// The name of the timezone the queried location is in
+  /// The name of the timezone
+  /// the queried location is in
   String? timeZoneName;
 
   /// The timezone offset from UTC time of the location for which the weather was queried, in seconds

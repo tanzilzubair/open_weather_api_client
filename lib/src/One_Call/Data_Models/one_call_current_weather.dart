@@ -5,6 +5,18 @@ import '../../Utilities/units_settings.dart';
 /// This is the class that handles JSON deserialization and makes data for the current weather
 /// forecast received from queries to the OneCall API endpoint accessible.
 class OneCallCurrentWeather {
+  /// The condition ID provided by OpenWeather. The table for what the values represent can be found at
+  /// https://openweathermap.org/weather-conditions . I do not recommend you use this directly.
+  /// Instead, use the [weatherType] parameter, which is extrapolated from both this and the icon string
+  /// sent by OpenWeather for a specific request
+  int? weatherID;
+
+  /// The icon ID provided by OpenWeather. The table for what the values represent can be found at
+  /// https://openweathermap.org/weather-conditions . I do not recommend you use this directly.
+  /// Instead, use the [weatherType] parameter, which is extrapolated from both this and the id
+  /// sent by OpenWeather for a specific request
+  String? iconID;
+
   /// The enum for identifying what the weather condition is. The main description
   /// parameter provides one suitable for display, so this is primarily provided to
   /// aid in implementing conditional logic dependent on the weather, for example, a
@@ -68,6 +80,8 @@ class OneCallCurrentWeather {
   DateTime? timeStamp;
 
   OneCallCurrentWeather({
+    this.weatherID,
+    this.iconID,
     this.weatherType,
     this.mainDescription,
     this.secondaryDescription,
@@ -154,6 +168,8 @@ class OneCallCurrentWeather {
     );
 
     return OneCallCurrentWeather(
+      weatherID: json['weather'][0]['id'],
+      iconID: json['weather'][0]['icon'],
       weatherType: weatherType,
       mainDescription: json['weather'][0]['main'],
       secondaryDescription: json['weather'][0]['description'],

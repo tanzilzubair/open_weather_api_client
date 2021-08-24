@@ -1,6 +1,6 @@
 name: open_weather_api_client
 description: A comprehensive dart library for interfacing with the Open Weather API, providing wrappers for every endpoint served by OpenWeather.
-version: 3.1.0
+version: 3.1.1
 homepage: https://www.tanzilzubair.tech
 repository: https://github.com/tanzilzubair/open_weather_api_client
 

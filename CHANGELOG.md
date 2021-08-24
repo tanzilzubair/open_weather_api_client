@@ -1,3 +1,8 @@
+## [3.1.1] - Minor Improvements
+* Added separate `weatherID` and `iconID` parameters to all applicable weather
+  models
+* Improved code comments for the API reference
+
 ## [3.1.0] - Minor Change
 * Added WeatherType enum values for the weather conditions `Freezing Rain`, `Hail`, 
   and `Sleet` 
