@@ -1,3 +1,7 @@
+## [3.0.1] - Minor Change
+* Redundant enum values removed
+* Improved `README.md`
+
 ## [3.0.0] - Minor Breaking Changes
 * BREAKING CHANGE: `RequestResponse` now uses named parameters
 * A city name and coordinates cannot both be given to the same factory class anymore

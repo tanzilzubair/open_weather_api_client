@@ -2,13 +2,10 @@
 enum RequestStatus {
   Undetermined,
   Successful,
-  InProgress,
   NonExistentError,
   EmptyError,
   TimeoutError,
   ConnectionError,
-  ConnectionErrorNoCache,
-  ConnectionErrorCacheAvailable,
   OverloadError,
   UnknownError,
 }
