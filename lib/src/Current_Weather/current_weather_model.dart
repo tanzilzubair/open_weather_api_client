@@ -40,6 +40,9 @@ class CurrentWeather {
   /// The maximum temperature for that area for that moment, in Celsius by default
   num? maxTemp;
 
+  /// The visibility for that area for that moment, in Kilometres by default
+  num? visibility;
+
   /// The humidity, in percentage
   num? humidity;
 
@@ -99,6 +102,7 @@ class CurrentWeather {
     this.feelsLike,
     this.minTemp,
     this.maxTemp,
+    this.visibility,
     this.humidity,
     this.cloudiness,
     this.pressure,
@@ -152,6 +156,11 @@ class CurrentWeather {
       unit: settings.temperatureUnit,
     );
 
+    // Formatting the visibility
+    num? visibility = distanceToSelectedUnit(
+      distance: json['visibility'],
+      unit: settings.distanceUnit,
+    );
     // Formatting the pressure
     num pressure = pressureToSelectedUnit(
       pressure: json['main']['pressure'],
@@ -219,6 +228,7 @@ class CurrentWeather {
       feelsLike: feelsLike,
       minTemp: minTemp,
       maxTemp: maxTemp,
+      visibility: visibility,
       humidity: json['main']['humidity'],
       cloudiness: json['clouds']['all'],
       pressure: pressure,

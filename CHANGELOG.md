@@ -1,3 +1,10 @@
+## [3.1.0] - Minor Change
+* Added WeatherType enum values for the weather conditions `Freezing Rain`, `Hail`, 
+  and `Sleet` 
+* Added support for converting wind speed to the Beaufort Scale
+* Fixed several minor bugs in the weather models
+* Fixed several minor bugs in the unit conversion logic 
+
 ## [3.0.1] - Minor Change
 * Redundant enum values removed
 * Improved `README.md`

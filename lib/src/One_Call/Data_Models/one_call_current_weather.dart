@@ -112,10 +112,16 @@ class OneCallCurrentWeather {
       unit: settings.temperatureUnit,
     );
 
-    // Formatting feels like temperature
+    // Formatting dew point temperature
     num? dewPointTemp = temperatureToSelectedUnit(
       temp: json['dew_point'],
       unit: settings.temperatureUnit,
+    );
+
+    // Formatting the visibility
+    num? visibility = distanceToSelectedUnit(
+      distance: json['visibility'],
+      unit: settings.distanceUnit,
     );
 
     // Formatting the pressure
@@ -157,7 +163,7 @@ class OneCallCurrentWeather {
       humidity: json['humidity'],
       cloudiness: json['clouds'],
       uvi: json['uvi'],
-      visibility: json['visibility'],
+      visibility: visibility,
       pressure: pressure,
       windSpeed: windSpeed,
       windDegree: json['wind_deg'],

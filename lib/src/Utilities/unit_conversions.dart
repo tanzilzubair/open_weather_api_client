@@ -36,11 +36,10 @@ num? distanceToSelectedUnit({
   return num.parse(result);
 }
 
-num? windSpeedToSelectedUnit(
-    {required num? windSpeed,
-    required WindSpeedUnit unit,
-    String? reConvertString}) {
-  /// TODO: Add beaufort
+num? windSpeedToSelectedUnit({
+  required num? windSpeed,
+  required WindSpeedUnit unit,
+}) {
   String result = "";
   // This null check exists as if a weather phenomenon does not occur, Open Weather Map returns null as its value
   if (windSpeed != null) {
@@ -221,7 +220,6 @@ WeatherType infoToWeatherType({required int id, required String iconId}) {
     case 501:
     case 521:
     case 531:
-    case 511:
       {
         weatherType = WeatherType.MediumRain;
       }
@@ -238,26 +236,40 @@ WeatherType infoToWeatherType({required int id, required String iconId}) {
       }
       break;
     case 600:
-    case 611:
-    case 615:
     case 620:
       {
         weatherType = WeatherType.LightSnow;
       }
       break;
     case 601:
-    case 612:
-    case 616:
     case 621:
       {
         weatherType = WeatherType.MediumSnow;
       }
       break;
     case 602:
-    case 613:
+
     case 622:
       {
         weatherType = WeatherType.HeavySnow;
+      }
+      break;
+    case 511:
+    case 615:
+      {
+        weatherType = WeatherType.FreezingRain;
+      }
+      break;
+    case 616:
+      {
+        weatherType = WeatherType.Hail;
+      }
+      break;
+    case 611:
+    case 612:
+    case 613:
+      {
+        weatherType = WeatherType.Sleet;
       }
       break;
     default:
