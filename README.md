@@ -74,7 +74,7 @@ All of the fields in the JSON response from the OneCall API endpoint are present
 - [ ] Unit tests    
 - [ ] Support for the Geocoding endpoint    
 - [ ] Support for the 5 Day Forecast endpoint    
-- [ ] Support for the Air Pollution endpoint    
+- [x] Support for the Air Pollution endpoint    
 - [ ] Support for the Weather Maps 1.0 endpoint (Including widgets to render the map)    
 - [ ] Full support for error handling, including edge cases  
 - [x] Implement more unit settings    
