@@ -2,28 +2,28 @@ import 'dart:convert';
 
 /// This class represents specific components of air pollution
 class Components {
-  /// This field represents Carbon monoxide (CO)
+  /// This field represents Carbon monoxide (CO) in μg/m3
   final double co;
 
-  /// This field represents Nitrogen monoxide (NO)
+  /// This field represents Nitrogen monoxide (NO) in μg/m3
   final double no;
 
-  /// This field represents Nitrogen dioxide (NO2)
+  /// This field represents Nitrogen dioxide (NO2) in μg/m3
   final double no2;
 
-  /// This field represents Ozone (O3)
+  /// This field represents Ozone (O3) in μg/m3
   final double o3;
 
-  /// This field represents Sulphur dioxide (SO2)
+  /// This field represents Sulphur dioxide (SO2) in μg/m3
   final double so2;
 
-  /// This field represents pariculates (PM2.5)
+  /// This field represents Fine particles matter (PM2.5) in μg/m3
   final double pm25;
 
-  /// This field represents pariculates (PM10)
+  /// This field represents Coarse particulate matter (PM10) in μg/m3
   final double pm10;
 
-  /// This field represents Ammonia (NH3)
+  /// This field represents Ammonia (NH3) in μg/m3
   final double nh3;
 
   const Components({
