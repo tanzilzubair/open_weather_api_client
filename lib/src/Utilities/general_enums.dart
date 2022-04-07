@@ -49,6 +49,7 @@ enum InternetStatus {
 enum RequestType {
   CurrentWeather,
   OneCall,
+  AirPollution,
 }
 
 /// The enum for specifying which fields you want excluded from a query to the One Call API endpoint

@@ -9,6 +9,10 @@ export 'package:open_weather_api_client/src/One_Call/one_call_weather_model.dart
 export 'package:open_weather_api_client/src/One_Call/one_call_weather_factory.dart';
 export 'package:open_weather_api_client/src/One_Call/Data_Models/one_call_components.dart';
 
+/// Exporting the AirPollution classes
+export 'package:open_weather_api_client/src/air_pollution/current_air_pollution_model.dart';
+export 'package:open_weather_api_client/src/air_pollution/current_air_pollution_factory.dart';
+
 /// Exporting the enums
 export 'package:open_weather_api_client/src/Utilities/general_enums.dart'
     show RequestStatus, WeatherType, InternetStatus, ExcludeField, Language;

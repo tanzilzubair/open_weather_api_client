@@ -82,6 +82,8 @@ class WeatherFactoryUtilities {
       request = 'weather';
     } else if (requestType == RequestType.OneCall) {
       request = "onecall";
+    } else if (requestType == RequestType.AirPollution) {
+      request = 'air_pollution';
     }
     return request;
   }
