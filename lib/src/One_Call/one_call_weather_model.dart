@@ -116,10 +116,12 @@ class OneCallWeather {
       minutelyWeather: minutelyWeather,
       hourlyWeather: hourlyWeather,
       dailyWeather: dailyWeather,
-      alertsWeather: OneCallAlertsWeather.fromJson(
-        json['alerts'],
-        settings,
-      ),
+      alertsWeather: json['alerts'] != null
+          ? OneCallAlertsWeather.fromJson(
+              json['alerts'],
+              settings,
+            )
+          : null,
     );
   }
 }

@@ -208,25 +208,25 @@ class CurrentWeather {
 
     // Formatting the rain amount in the past 1 hour
     num? rainAmountLast1h = precipitationToSelectedUnit(
-      amount: json['rain']['1h'],
+      amount: json['rain']?['1h'],
       unit: settings.precipitationUnit,
     );
 
     // Formatting the rain amount in the past 3 hours
     num? rainAmountLast3h = precipitationToSelectedUnit(
-      amount: json['rain']['3h'],
+      amount: json['rain']?['3h'],
       unit: settings.precipitationUnit,
     );
 
     // Formatting the snow amount in the past 1 hour
     num? snowAmountLast1h = precipitationToSelectedUnit(
-      amount: json['snow']['1h'],
+      amount: json['snow']?['1h'],
       unit: settings.precipitationUnit,
     );
 
     // Formatting the snow amount in the past 3 hour
     num? snowAmountLast3h = precipitationToSelectedUnit(
-      amount: json['snow']['3h'],
+      amount: json['snow']?['3h'],
       unit: settings.precipitationUnit,
     );
     return CurrentWeather(

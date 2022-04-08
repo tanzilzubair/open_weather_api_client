@@ -86,7 +86,7 @@ class OneCallDailyWeather {
   num? windGustSpeed;
 
   /// The probability of precipitation on that day, as a percentage
-  int? precipitationChance;
+  double? precipitationChance;
 
   /// The amount of predicted rainfall that day, in millimetres by default
   num? rainAmount;
@@ -251,8 +251,8 @@ class OneCallDailyWeather {
     );
 
     // Formatting the probability of precipitation
-    int? pop = (json['pop']) * 100;
-    int? precipitationChance = int.parse(pop!.toStringAsFixed(0));
+    double? pop = (json['pop']?.toDouble()) * 100;
+    double? precipitationChance = double.parse(pop!.toStringAsFixed(0));
 
     // Formatting the amount of rain
     num? rainAmount = precipitationToSelectedUnit(
