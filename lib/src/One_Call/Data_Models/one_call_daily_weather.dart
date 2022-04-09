@@ -256,12 +256,12 @@ class OneCallDailyWeather {
 
     // Formatting the amount of rain
     num? rainAmount = precipitationToSelectedUnit(
-      amount: json['rain'],
+      amount: json['rain']?.toDouble(),
       unit: settings.precipitationUnit,
     );
     // Formatting the amount of snow
     num? snowAmount = precipitationToSelectedUnit(
-      amount: json['snow'],
+      amount: json['snow']?.toDouble(),
       unit: settings.precipitationUnit,
     );
 
