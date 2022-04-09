@@ -3,7 +3,7 @@ import 'dart:convert';
 import '/src/air_pollution/components.dart';
 
 /// This class represents base air pollution data
-class AirPollutionItem {
+class CurrentAirPollutionItem {
   /// This field represents air quality index
   final int aqi;
 
@@ -11,41 +11,44 @@ class AirPollutionItem {
   final Components components;
 
   /// This field represents utc date time
-  final int dt;
+  final DateTime? timeStamp;
 
-  const AirPollutionItem({
+  const CurrentAirPollutionItem({
     required this.aqi,
     required this.components,
-    required this.dt,
+    required this.timeStamp,
   });
 
   /// From map constructor used for JSON deserialization
-  factory AirPollutionItem.fromMap(Map<String, dynamic> map) {
-    return AirPollutionItem(
+  factory CurrentAirPollutionItem.fromMap(Map<String, dynamic> map) {
+    return CurrentAirPollutionItem(
       aqi: map['main']['aqi'].toInt(),
       components: Components.fromMap(map['components']),
-      dt: map['dt'].toInt(),
+      timeStamp: DateTime.fromMillisecondsSinceEpoch(
+        (map['dt']) * 1000,
+        isUtc: true,
+      ),
     );
   }
 
   /// JSON deserialization constructor
-  factory AirPollutionItem.fromJson(String source) =>
-      AirPollutionItem.fromMap(json.decode(source));
+  factory CurrentAirPollutionItem.fromJson(String source) =>
+      CurrentAirPollutionItem.fromMap(json.decode(source));
 
   @override
   String toString() =>
-      'AirPollutionItem(aqi: $aqi, components: $components, dt: $dt)';
+      'AirPollutionItem(aqi: $aqi, components: $components, dt: $timeStamp)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is AirPollutionItem &&
+    return other is CurrentAirPollutionItem &&
         other.aqi == aqi &&
         other.components == components &&
-        other.dt == dt;
+        other.timeStamp == timeStamp;
   }
 
   @override
-  int get hashCode => aqi.hashCode ^ components.hashCode ^ dt.hashCode;
+  int get hashCode => aqi.hashCode ^ components.hashCode ^ timeStamp.hashCode;
 }
