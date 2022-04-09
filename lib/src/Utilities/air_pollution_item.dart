@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import '/src/air_pollution/components.dart';
+import '../Utilities/components.dart';
 
 /// This class represents base air pollution data
-class CurrentAirPollutionItem {
+class AirPollutionItem {
   /// This field represents air quality index
   final int aqi;
 
@@ -13,15 +13,15 @@ class CurrentAirPollutionItem {
   /// This field represents utc date time
   final DateTime? timeStamp;
 
-  const CurrentAirPollutionItem({
+  const AirPollutionItem({
     required this.aqi,
     required this.components,
     required this.timeStamp,
   });
 
   /// From map constructor used for JSON deserialization
-  factory CurrentAirPollutionItem.fromMap(Map<String, dynamic> map) {
-    return CurrentAirPollutionItem(
+  factory AirPollutionItem.fromMap(Map<String, dynamic> map) {
+    return AirPollutionItem(
       aqi: map['main']['aqi'].toInt(),
       components: Components.fromMap(map['components']),
       timeStamp: DateTime.fromMillisecondsSinceEpoch(
@@ -32,8 +32,8 @@ class CurrentAirPollutionItem {
   }
 
   /// JSON deserialization constructor
-  factory CurrentAirPollutionItem.fromJson(String source) =>
-      CurrentAirPollutionItem.fromMap(json.decode(source));
+  factory AirPollutionItem.fromJson(String source) =>
+      AirPollutionItem.fromMap(json.decode(source));
 
   @override
   String toString() =>
@@ -43,7 +43,7 @@ class CurrentAirPollutionItem {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is CurrentAirPollutionItem &&
+    return other is AirPollutionItem &&
         other.aqi == aqi &&
         other.components == components &&
         other.timeStamp == timeStamp;

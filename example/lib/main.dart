@@ -148,7 +148,62 @@ class Example3 extends StatelessWidget {
 
               // Requesting the air pollution
               RequestResponse<CurrentAirPollution?> result =
-                  await factory.getAirPollution();
+                  await factory.getCurrentAirPollution();
+
+              // Checking if the request was successful
+              if (result.requestStatus == RequestStatus.Successful) {
+                // Printing the air pollution response
+                print(result.response!.airPollutionItem.toString());
+              } else {
+                // Printing the error that occurred
+                print("Error of type ${result.requestStatus} occurred");
+              }
+            },
+            child: Container(
+              width: 200,
+              height: 100,
+              alignment: Alignment.center,
+              color: Colors.green,
+              child: Text(
+                "Get Air pollution at London",
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// This example uses the forecast Air pollution API endpoint
+class Example4 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () async {
+              // Setting up the air pollution factory
+              ForecastAirPollutionFactory factory = ForecastAirPollutionFactory(
+                apiKey: "Your API Key here",
+                locationCoords: LocationCoords(
+                  latitude: 51.5072,
+                  longitude: 0.1276,
+                ),
+              );
+
+              // Requesting the air pollution
+              RequestResponse<ForecastAirPollution?> result =
+                  await factory.getForecastAirPollution();
 
               // Checking if the request was successful
               if (result.requestStatus == RequestStatus.Successful) {
