@@ -65,7 +65,7 @@ class OneCallHourlyWeather {
   num? windGustSpeed;
 
   /// The probability of precipitation in that hour, as a percentage
-  int? precipitationChance;
+  double? precipitationChance;
 
   /// The amount of rainfall in the past 1 hour, in mm by default
   num? rainAmountLast1h;
@@ -153,17 +153,17 @@ class OneCallHourlyWeather {
     );
 
     // Formatting the probability of precipitation
-    int? pop = (json['pop']) * 100;
-    int? precipitationChance = int.parse(pop!.toStringAsFixed(0));
+    double? pop = (json['pop']?.toDouble()) * 100;
+    double? precipitationChance = double.parse(pop!.toStringAsFixed(0));
 
     // Formatting the amount of rain
     num? rainAmountLast1h = precipitationToSelectedUnit(
-      amount: json['rain']['1h'],
+      amount: json['rain']?['1h']?.toDouble(),
       unit: settings.precipitationUnit,
     );
     // Formatting the amount of snow
     num? snowAmountLast1h = precipitationToSelectedUnit(
-      amount: json['snow']['1h'],
+      amount: json['snow']?['1h']?.toDouble(),
       unit: settings.precipitationUnit,
     );
 

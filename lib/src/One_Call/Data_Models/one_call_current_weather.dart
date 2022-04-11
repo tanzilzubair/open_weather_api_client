@@ -158,12 +158,12 @@ class OneCallCurrentWeather {
 
     // Formatting the amount of rain
     num? rainAmountLast1h = precipitationToSelectedUnit(
-      amount: json['rain']['1h'],
+      amount: json['rain']?['1h']?.toDouble(),
       unit: settings.precipitationUnit,
     );
     // Formatting the amount of snow
     num? snowAmountLast1h = precipitationToSelectedUnit(
-      amount: json['snow']['1h'],
+      amount: json['snow']?['1h']?.toDouble(),
       unit: settings.precipitationUnit,
     );
 
