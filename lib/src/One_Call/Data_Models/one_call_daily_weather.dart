@@ -115,7 +115,7 @@ class OneCallDailyWeather {
   /// - A value between 0.5 and 0.75 is a waning gibbous
   /// - A value of 0.75 is a last quarter moon
   /// - A value between 0.75 and 1 is a waning crescent
-  double? moonPhase;
+  num? moonPhase;
 
   /// The timestamp of when the data was requested, in UTC time
   DateTime? timeStamp;
