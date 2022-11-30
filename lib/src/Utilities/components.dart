@@ -45,7 +45,7 @@ class Components {
       'no2': no2,
       'o3': o3,
       'so2': so2,
-      'pm25': pm25,
+      'pm2_5': pm25,
       'pm10': pm10,
       'nh3': nh3,
     };

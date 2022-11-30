@@ -2,8 +2,10 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:connectivity/connectivity.dart';
+import 'package:flutter/services.dart';
 import 'package:open_weather_api_client/src/Utilities/languages.dart';
 import 'package:open_weather_api_client/src/Utilities/location_coords.dart';
+import 'package:open_weather_api_client/src/Utilities/start_end.dart';
 import 'general_enums.dart';
 
 class WeatherFactoryUtilities {
@@ -23,6 +25,7 @@ class WeatherFactoryUtilities {
     List<ExcludeField>? exclusions,
     String? cityName,
     LocationCoords? location,
+    StartEnd?       duration,
   }) {
     String tag = _findRequestType(requestType: requestType);
     String url = 'https://api.openweathermap.org/data/2.5/' + '$tag?';
@@ -33,6 +36,9 @@ class WeatherFactoryUtilities {
       // This is inside the if statement that location coords have been given, and not outside,
       // since the OneCall API endpoint only accepts queries made with coordinates, at the time
       // of writing this
+      if (requestType == RequestType.HistoryAirPollution && duration != null) {
+        url += 'start=${duration.start}&end=${duration.end}&';
+      }
       if (requestType == RequestType.OneCall && exclusions != null) {
         url += _computeExclusion(exclusions: exclusions);
       }
@@ -86,6 +92,8 @@ class WeatherFactoryUtilities {
       request = 'air_pollution';
     } else if (requestType == RequestType.ForecastAirPollution) {
       request = 'air_pollution/forecast';
+    } else if (requestType == RequestType.HistoryAirPollution) {
+      request = 'air_pollution/history';
     }
     return request;
   }
