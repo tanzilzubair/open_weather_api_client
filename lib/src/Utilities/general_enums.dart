@@ -51,6 +51,7 @@ enum RequestType {
   OneCall,
   CurrentAirPollution,
   ForecastAirPollution,
+  HistoryAirPollution,
 }
 
 /// The enum for specifying which fields you want excluded from a query to the One Call API endpoint
