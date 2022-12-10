@@ -34,7 +34,7 @@ class OneCallWeather {
   List<OneCallDailyWeather?>? dailyWeather;
 
   /// National weather alerts provided by different major national weather warning systems
-  OneCallAlertsWeather? alertsWeather;
+  List<OneCallAlertsWeather?>? alertsWeather;
 
   OneCallWeather({
     this.locationCoords,
@@ -102,6 +102,22 @@ class OneCallWeather {
       dailyWeather = null;
     }
 
+    // Looping through the array of alerts weather JSON and parsing them into a list, but only if
+    // the JSON is not null, as some requests sometimes don't include specific parts
+    List? alertsPayload = json['alerts'];
+    List<OneCallAlertsWeather?>? alertsWeather;
+
+    if (alertsPayload != null) {
+      alertsWeather = alertsPayload.map((e) {
+        return OneCallAlertsWeather.fromJson(
+          e,
+          settings,
+        );
+      }).toList();
+    } else {
+      alertsWeather = null;
+    }
+
     return OneCallWeather(
       locationCoords: LocationCoords(
         latitude: json['lat'],
@@ -116,10 +132,7 @@ class OneCallWeather {
       minutelyWeather: minutelyWeather,
       hourlyWeather: hourlyWeather,
       dailyWeather: dailyWeather,
-      alertsWeather: OneCallAlertsWeather.fromJson(
-        json['alerts'],
-        settings,
-      ),
+      alertsWeather: alertsWeather,
     );
   }
 }

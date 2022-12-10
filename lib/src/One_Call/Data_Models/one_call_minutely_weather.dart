@@ -20,7 +20,7 @@ class OneCallMinutelyWeather {
   ) {
     // Formatting the amount of rain
     num? precipitationAmount = precipitationToSelectedUnit(
-      amount: json['precipitation'],
+      amount: json['precipitation']?.toDouble(),
       unit: settings.precipitationUnit,
     );
     return OneCallMinutelyWeather(

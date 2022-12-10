@@ -86,7 +86,7 @@ class OneCallDailyWeather {
   num? windGustSpeed;
 
   /// The probability of precipitation on that day, as a percentage
-  int? precipitationChance;
+  double? precipitationChance;
 
   /// The amount of predicted rainfall that day, in millimetres by default
   num? rainAmount;
@@ -115,7 +115,7 @@ class OneCallDailyWeather {
   /// - A value between 0.5 and 0.75 is a waning gibbous
   /// - A value of 0.75 is a last quarter moon
   /// - A value between 0.75 and 1 is a waning crescent
-  double? moonPhase;
+  num? moonPhase;
 
   /// The timestamp of when the data was requested, in UTC time
   DateTime? timeStamp;
@@ -251,17 +251,17 @@ class OneCallDailyWeather {
     );
 
     // Formatting the probability of precipitation
-    int? pop = (json['pop']) * 100;
-    int? precipitationChance = int.parse(pop!.toStringAsFixed(0));
+    double? pop = (json['pop']?.toDouble()) * 100;
+    double? precipitationChance = double.parse(pop!.toStringAsFixed(0));
 
     // Formatting the amount of rain
     num? rainAmount = precipitationToSelectedUnit(
-      amount: json['rain'],
+      amount: json['rain']?.toDouble(),
       unit: settings.precipitationUnit,
     );
     // Formatting the amount of snow
     num? snowAmount = precipitationToSelectedUnit(
-      amount: json['snow'],
+      amount: json['snow']?.toDouble(),
       unit: settings.precipitationUnit,
     );
 
